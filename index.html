@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadgenie - Extract Contact Info from Any Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .header-btn {
+            background: #4f46e5;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        .header-btn:hover {
+            background: #4338ca;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #1a202c;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: #4a5568;
+            margin-bottom: 40px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+            padding: 16px 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-block;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(79,70,229,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(79,70,229,0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #4f46e5;
+            padding: 16px 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-block;
+            transition: all 0.2s;
+            border: 2px solid #4f46e5;
+        }
+
+        .btn-secondary:hover {
+            background: #f7f7ff;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 70px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            color: #1a202c;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: #4f46e5;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+
+        .step p {
+            color: #4a5568;
+            font-size: 16px;
+        }
+
+        /* Features */
+        .features {
+            padding: 70px 0;
+            background: #f8f9fa;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .feature-item h3 {
+            font-size: 19px;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+
+        .feature-item p {
+            color: #4a5568;
+            font-size: 15px;
+        }
+
+        .premium-tag {
+            display: inline-block;
+            background: #fbbf24;
+            color: #78350f;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 70px 0;
+            background: white;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 35px 28px;
+            text-align: center;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .pricing-card.featured {
+            border-color: #4f46e5;
+            border-width: 3px;
+            box-shadow: 0 6px 16px rgba(79,70,229,0.2);
+        }
+
+        .badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ef4444;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .plan-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a202c;
+        }
+
+        .plan-price {
+            font-size: 44px;
+            font-weight: 800;
+            color: #4f46e5;
+            margin-bottom: 8px;
+        }
+
+        .plan-period {
+            color: #6b7280;
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 28px;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            color: #374151;
+            font-size: 15px;
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .plan-features li.disabled {
+            color: #9ca3af;
+        }
+
+        .plan-features li.disabled::before {
+            content: "×";
+            color: #d1d5db;
+        }
+
+        .plan-btn {
+            width: 100%;
+            background: #4f46e5;
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .plan-btn:hover {
+            background: #4338ca;
+        }
+
+        .plan-btn.outline {
+            background: transparent;
+            color: #4f46e5;
+            border: 2px solid #4f46e5;
+        }
+
+        .plan-btn.outline:hover {
+            background: #f7f7ff;
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        /* Payment Info */
+        .payment-info {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+
+        .payment-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .payment-box h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1a202c;
+        }
+
+        .payment-steps {
+            list-style: none;
+        }
+
+        .payment-steps li {
+            padding: 12px 0;
+            font-size: 16px;
+            color: #374151;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .payment-steps li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #4f46e5;
+            font-weight: 700;
+        }
+
+        .payment-note {
+            background: #fef3c7;
+            border-left: 4px solid #fbbf24;
+            padding: 16px 20px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .payment-note p {
+            color: #78350f;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .payment-box {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🧞 Leadgenie</div>
+                <a href="https://forms.gle/zTjKPTwFQf2mEqfKA" class="header-btn">Get Premium</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Extract Contact Info from Any Website</h1>
+            <p>Get emails, phone numbers, and social media links in seconds. Built for agencies, marketers, and founders who need leads fast.</p>
+            <div class="hero-buttons">
+                <a href="https://leadgenie-mvp-36kippkqc7xiyonjcbihge.streamlit.app/#leadgenie" class="btn-primary">Try Free Preview</a>
+                <a href="https://forms.gle/zTjKPTwFQf2mEqfKA" class="btn-secondary">Request Premium Access</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Paste Website URL</h3>
+                    <p>Enter any company website you want to research</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Extract Contact Data</h3>
+                    <p>Leadgenie scans and pulls all available contact information</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Download Results</h3>
+                    <p>Get your leads as CSV and add them to your workflow</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What You Get</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>📧 Email Extraction</h3>
+                    <p>Find all email addresses from any website automatically</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📱 Phone Numbers</h3>
+                    <p>Extract phone numbers in all formats</p>
+                    <span class="premium-tag">PREMIUM</span>
+                </div>
+                <div class="feature-item">
+                    <h3>🔗 Social Media Links</h3>
+                    <p>Discover LinkedIn, Twitter, Facebook, Instagram profiles</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📥 CSV Export</h3>
+                    <p>Download all contact data as spreadsheet</p>
+                    <span class="premium-tag">PREMIUM</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Free</h3>
+                    <div class="plan-price">$0</div>
+                    <div class="plan-period">Forever</div>
+                    <ul class="plan-features">
+                        <li class="disabled">Limited to 2 emails</li>
+                        <li>Social media links</li>
+                        <li class="disabled">No phone numbers</li>
+                        <li class="disabled">No CSV download</li>
+                    </ul>
+                    <a href="https://leadgenie-mvp-36kippkqc7xiyonjcbihge.streamlit.app/#leadgenie" class="plan-btn outline">Try Free</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="plan-name">Monthly</h3>
+                    <div class="plan-price">$25</div>
+                    <div class="plan-period">per month-300/year</div>
+                    <ul class="plan-features">
+                        <li>Unlimited emails</li>
+                        <li>All phone numbers</li>
+                        <li>All social links</li>
+                        <li>CSV download</li>
+                        <li>Unlimited searches</li>
+                    </ul>
+                    <a href="https://forms.gle/zTjKPTwFQf2mEqfKA" class="plan-btn">Get Monthly</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="badge">EARLY ADOPTER</div>
+                    <h3 class="plan-name">Annual</h3>
+                    <div class="strikethrough">$300/year</div>
+                    <div class="plan-price">$200</div>
+                    <div class="plan-period">per year · Save $100</div>
+                    <ul class="plan-features">
+                        <li>Unlimited emails</li>
+                        <li>All phone numbers</li>
+                        <li>All social links</li>
+                        <li>CSV download</li>
+                        <li>Unlimited searches</li>
+                    </ul>
+                    <a href="https://forms.gle/zTjKPTwFQf2mEqfKA" class="plan-btn">Get Annual</a>
+                    <p style="margin-top: 14px; font-size: 13px; color: #ef4444; font-weight: 600;">Only 30 spots at this price</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="payment-info">
+        <div class="container">
+            <div class="payment-box">
+                <h2>Payment & Access</h2>
+                <p style="margin-bottom: 20px; color: #4a5568;">Here's how you get premium access:</p>
+                <ol class="payment-steps">
+                    <li>Submit your email and chosen plan via our Google Form</li>
+                    <li>You'll receive a payment request via Payoneer to your email</li>
+                    <li>Complete the payment securely through Payoneer</li>
+                    <li>Your email is activated for premium access within 24 hours</li>
+                </ol>
+                <div class="payment-note">
+                    <p>💳 All payments are processed securely through Payoneer. No automatic subscriptions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Leadgenie is built for legitimate business research purposes.</p>
+            <p>Please respect website terms of service and robots.txt when using this tool.</p>
+            <p style="margin-top: 20px;">&copy; 2024 Leadgenie. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
